@@ -1,15 +1,7 @@
-def modules = [:]
-pipeline {
-    agent any
-    stages {
-        stage('test') {
-            steps {
-                script{
-                    modules.first = load "file.groovy"
-                    modules.second.init(modules.first)
-                    modules.first.test1()
-                }
-            }
-        }
-    }
+node {
+  checkout scm
+  //other commands if you have
+
+  def runner = load pwd() + '/file.groovy'
+  runner.whateverMethod(arg1,arg2)
 }
