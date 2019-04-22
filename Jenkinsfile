@@ -1,23 +1,15 @@
+def modules = [:]
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('test') {
             steps {
-            
-                
+                script{
+                    modules.first = load "file.groovy"
+                    modules.second.init(modules.first)
+                    modules.first.test1()
+                }
             }
         }
-    }
-    node {
-    checkout scm
-    def rootDir = pwd()
-    println("Current Directory: " + rootDir)
-
-    // point to exact source file
-    def example = load "${rootDir}/file.Groovy"
-
-    example.exampleMethod()
-    example.otherExampleMethod() 
     }
 }
